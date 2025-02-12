@@ -1,0 +1,35 @@
+﻿@model WeatherData
+
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-body text-center">
+            @if (Model == null)
+            {
+                <div class="alert alert-danger">
+                    ❌ <strong>Помилка:</strong> Такого міста не знайдено або сталася помилка API.
+                </div>
+            }
+            else
+            {
+                <h2 class="card-title text-primary">Weather Forecast for @Model.City</h2>
+                <p class="lead">🌡 Min: <strong>@Model.TemperatureMin °C</strong></p>
+                <p class="lead">🌞 Max: <strong>@Model.TemperatureMax °C</strong></p>
+                <p class="text-muted">🌤 Condition: <em>@Model.Description</em></p>
+
+                @if (ViewBag.ShowWarning != null && ViewBag.ShowWarning == true)
+                {
+                    <div class="alert alert-warning mt-3">
+                        ⚠️ <strong>Увага!</strong> Очікується дощ у місті <strong>@Model.City</strong>.
+                    </div>
+                }
+            }
+
+            <form method="get" class="mt-4">
+                <div class="input-group">
+                    <input type="text" name="city" class="form-control" placeholder="Enter city" required>
+                    <button type="submit" class="btn btn-primary">Get Weather</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
